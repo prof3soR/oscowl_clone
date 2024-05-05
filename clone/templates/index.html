@@ -1,0 +1,296 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSCOWL & Co</title>
+    <style>
+        /* Add your CSS styles here */
+        /* For simplicity, inline styles are used */
+        body {
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .section {
+            padding: 50px 0;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+        }
+
+        .section-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap-reverse;
+            margin-left: 50px;
+        }
+
+        .section-content .text {
+            flex: 1;
+            text-align: left;
+            padding: 20px;
+        }
+
+        .section-content .image {
+            flex: 1;
+            padding-left: 20px;
+            margin: 20px;
+        }
+
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        #projects {
+            margin-top: 150px;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: left;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+            border-radius: 20px;
+        }
+
+        .card:hover {
+            transform: scale(1.04);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.05) rotate(1deg);
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        button {
+            width: 10em;
+            position: relative;
+            height: 3.5em;
+            border: 3px ridge #e4a20a;
+            outline: none;
+            background-color: transparent;
+            color: white;
+            transition: 1s;
+            border-radius: 0.3em;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button::after {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 3%;
+            width: 95%;
+            height: 40%;
+            background-color: black;
+            transition: 0.5s;
+            transform-origin: center;
+        }
+
+        button::before {
+            content: "";
+            transform-origin: center;
+            position: absolute;
+            top: 80%;
+            left: 3%;
+            width: 95%;
+            height: 40%;
+            background-color: black;
+            transition: 0.5s;
+        }
+
+        button:hover::before,
+        button:hover::after {
+            transform: scale(0)
+        }
+
+        button:hover {
+            box-shadow: inset 0px 0px 25px #e4a30ae4;
+        }
+
+        nav {
+            background-color: black;
+            padding: 30px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            /* Ensure it's on top of other content */
+            top: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #757575;
+            text-decoration: none;
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: gold;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('nav ul li a');
+
+            function changeLinkState() {
+                let index = sections.length;
+
+                while (--index && window.scrollY + 50 < sections[index].offsetTop) { }
+
+                console.log('Active section index:', index);
+
+                navLinks.forEach((link) => link.classList.remove('active'));
+                navLinks[index].classList.add('active');
+            }
+
+            changeLinkState();
+            window.addEventListener('scroll', changeLinkState);
+        });
+
+    </script>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#careers">Careers</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero" class="section">
+        <div class="section-content">
+            <div class="text">
+                <h1 style="font-size: 42px; color: #ccc;">AN AI BASED INVENTIONS</h1>
+                <p style="font-size: 32px; color: #757575;">We integrate AI in Various field of Engineering</p>
+                <button><a href="#about"></a>About Us</button>
+            </div>
+            <div class="image">
+                <img src="{% static 'hero-img.png' %}" alt="Hero Image" width="100%">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="section-content">
+            <div class="text">
+                <h2 style="font-size: 32px;">Who We Are</h2>
+                <p style="font-size: 22px;">Akoscowl Dot Inventions and Foundation is also known as OSCOWL & Co where we
+                    are at the forefront of
+                    technological innovation, harnessing the power of Artificial Intelligence (AI) and Quantum Computing
+                    to redefine possibilities across diverse industries.</p>
+                <button>Learn More</button>
+            </div>
+            <div class="image">
+                <img src="{% static 'about.jpg' %}" alt="About Image" width="100%">
+            </div>
+        </div>
+    </section>
+
+    <section id="research" class="section">
+        <h2>Research</h2>
+        <div class="video-container">
+            <video autoplay muted width="100%">
+                <source src="{% static 'dsc.mp4' %}" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 style="font-size: 33px;">PROJECT RETRE</h2>
+        <div class="grid-container">
+            <div class="card">
+                <img src="{% static 'blog-2.jpg' %}" alt="Project 1 Image" width="100%" style="border-radius: 20px;">
+                <h3>NeuraFly</h3>
+                <p>AI Based Flight Controller
+                </p>
+            </div>
+            <div class="card">
+                <img src="{% static 'blog-1.jpg' %}" alt="Project 1 Image" width="100%" style="border-radius: 20px;">
+                <h3>
+                    NumeraPi.ai </h3>
+                <p>An numerical computing platform for robust mathematical analysis and data manipulation for COMPUTING.
+                </p>
+            </div>
+            <div class="card">
+                <img src="{% static 'blog-3.jpg' %}" alt="Project 1 Image" width="100%" style="border-radius: 20px;">
+                <h3>StreamLingo </h3>
+                <p>Language Switching software for Online meetings and video Translator
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="careers" class="section">
+        <div class="section-content">
+            <div class="text">
+                <h2>Careers at us</h2>
+
+                <button>Apply Now</button>
+            </div>
+            <div class="image">
+                <img src="{% static 'APPLY NOW.png' %}" alt="Careers Image" width="100%">
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            • Contact us : helpdesk@oscowl.in
+            <p>• Contact us for Careers: careers@oscowl.in</p>
+            <p>Cloned with Django by Likhitha.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
